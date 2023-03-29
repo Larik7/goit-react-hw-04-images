@@ -1,25 +1,21 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 
-export class App extends Component {
-  state = {
-    imageSearch: '',
+export const App = () => {
+  const [imageSearch, setImageSearch] = useState('');
+
+  const handleFormSubmit = imageSearch => {
+    setImageSearch(imageSearch);
   };
 
-  handleFormSubmit = imageSearch => {
-    this.setState({ imageSearch });
-  };
-
-  render() {
-    return (
-      <div>
-        <ToastContainer />
-        <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery value={this.state.imageSearch} />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <ToastContainer />
+      <Searchbar onSubmit={handleFormSubmit} />
+      <ImageGallery value={imageSearch} />
+    </div>
+  );
+};

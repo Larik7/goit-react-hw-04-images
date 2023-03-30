@@ -19,10 +19,10 @@ export const ImageGallery = ({ value }) => {
       return;
     }
 
-    const fetchImages = async (query, currentPage) => {
+    const fetchImages = async (value, page) => {
       try {
         setLoading(true);
-        const resp = await fetchApi(query, currentPage);
+        const resp = await fetchApi(value, page);
   
         if (!resp || resp.hits.length === 0) {
           setError(
@@ -41,8 +41,19 @@ export const ImageGallery = ({ value }) => {
       }
     };
 
+    // const fetchImages = async () => {
+    //   try {
+    //     setLoading(true);
+    //     const resp = await fetchApi();
+    //   } catch (error) {
+    //     setError(String(error));
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
+
     fetchImages(value.trim(), page);
-  },[value, page]);
+  },[images, page, value]);
 
   useEffect(() => {
     setImages([]);
